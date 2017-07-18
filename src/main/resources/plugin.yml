@@ -1,0 +1,16 @@
+name: Smileymote
+main: com.gmail.zaxarner.smileymote.Smileymote
+version: @VERSION@
+description: Emotes & Smileys
+author: Zaxarner
+commands:
+    emote:
+      description: "Use an emote"
+      permission: smileymote.user
+      usage: "/<command> <emote> <player [optional]>"
+      aliases: [smote, em]
+    smileys:
+      description: "Lists all of the smileys"
+      permission: smileymote.user
+      usage: "/<command>"
+      aliases: [smiley, smiles]

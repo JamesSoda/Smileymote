@@ -1,0 +1,42 @@
+smileys:
+  smiley1:
+    input: ':)'
+    output: '☺'
+  smiley2:
+    input: '(:'
+    output: '☺'
+  heart:
+    input: '<3'
+    output: '♥'
+  check:
+    input: '*check'
+    output: '✔'
+  shrug:
+    input: '*shrug'
+    output: '¯\_(ツ)_/¯'
+  reddit:
+    input: '*reddit'
+    output: 'ಠ_ಠ'
+  cute:
+    input: '*cute'
+    output: '(｡◕‿◕｡)'
+emotes:
+  self:
+    #name:
+      #message: 'test'
+      #description: 'description'
+      #material: APPLE
+      #data: 0
+    cry:
+      message: '{player} starts crying'
+      description: 'Hug the target player'
+    smile:
+      message: '{player} starts smiling'
+      description: 'Hug the target player'
+    laugh:
+      message: '{player} starts laughing'
+      description: 'Hug the target player'
+  other:
+    hug:
+      message: '{player1} hugs {player2}'
+      description: 'Hug the target player'

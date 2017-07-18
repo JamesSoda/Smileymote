@@ -29,13 +29,13 @@ emotes:
       #data: 0
     cry:
       message: '{player} starts crying'
-      description: 'Hug the target player'
+      description: 'Cry uncontrollably'
     smile:
       message: '{player} starts smiling'
-      description: 'Hug the target player'
+      description: 'Smile with glee'
     laugh:
       message: '{player} starts laughing'
-      description: 'Hug the target player'
+      description: 'Start laughing excitedly'
   other:
     hug:
       message: '{player1} hugs {player2}'

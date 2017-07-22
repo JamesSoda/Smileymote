@@ -39,11 +39,15 @@ class Smileymote : JavaPlugin() {
 
         val emoteCommand = getCommand("emote")
         emoteCommand.executor = EmoteCommand()
-        emoteCommand.usage = "${ChatColor.GRAY}[${ChatColor.GOLD}Emote${ChatColor.GRAY}] ${ChatColor.RESET}${emoteCommand.usage}"
+        emoteCommand.usage = "${getPrefix()} ${ChatColor.RESET}${emoteCommand.usage}"
 
         val smileysCommand = getCommand("smileys")
         smileysCommand.executor = SmileysCommand()
-        smileysCommand.usage = "${ChatColor.GRAY}[${ChatColor.GOLD}Smileys${ChatColor.GRAY}] ${ChatColor.RESET}${smileysCommand.usage}"
+        smileysCommand.usage = "${getPrefix()} ${ChatColor.RESET}${smileysCommand.usage}"
+
+        val reloadCommand = getCommand("smileymotereload")
+        reloadCommand.executor = ReloadCommand()
+        reloadCommand.usage = "${getPrefix()} ${ChatColor.RESET}${reloadCommand.usage}"
 
         val selfEmoteSection = plugin.config.getConfigurationSection("emotes.self")
         val otherEmoteSection = plugin.config.getConfigurationSection("emotes.other")
@@ -125,6 +129,7 @@ class Smileymote : JavaPlugin() {
         playerSelectMenu.updatePlayerSelectMenu()
     }
 
+
     fun playerSelectForEmote(player: Player, message: String?) {
         if(message == null) {
             player.closeInventory()
@@ -133,6 +138,14 @@ class Smileymote : JavaPlugin() {
 
         playerSelectMenu.playersSelecting.put(player, message)
         playerSelectMenu.openInventory(player)
+    }
+
+    fun getPrefix() : String {
+        if(config["prefix"] != null) {
+            return ChatColor.translateAlternateColorCodes('&', config.getString("prefix"))
+        }
+
+        return ChatColor.translateAlternateColorCodes('&', "&7[&6Smileymote&7] ")
     }
 }
 

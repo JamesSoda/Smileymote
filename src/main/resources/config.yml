@@ -40,3 +40,4 @@ emotes:
     hug:
       message: '{player1} hugs {player2}'
       description: 'Hug the target player'
+prefix: "&7[&6Smileymote&7]"

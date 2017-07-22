@@ -14,3 +14,8 @@ commands:
       permission: smileymote.smiley
       usage: "/<command>"
       aliases: [smiley, smiles]
+    smileymotereload:
+      description: "Reloads the Smileymote config"
+      permission: smileymote.admin
+      usage: "/<command>"
+      aliases: [smileyreload, emotereload, smilereload]

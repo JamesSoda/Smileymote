@@ -42,7 +42,7 @@ class EmoteCommand : CommandExecutor {
             }
 
             selfMessage.substring(0, selfMessage.length - 1)
-            sender.sendMessage("${ChatColor.GRAY}[${ChatColor.GOLD}Emote${ChatColor.GRAY}] List of self emotes: ${ChatColor.RESET}$selfMessage.")
+            sender.sendMessage("${plugin.getPrefix()} List of self emotes: ${ChatColor.RESET}$selfMessage.")
 
 
             val otherEmoteIter = plugin.otherEmotes.iterator()
@@ -58,7 +58,7 @@ class EmoteCommand : CommandExecutor {
             }
 
             otherMessage.substring(0, otherMessage.length - 1)
-            sender.sendMessage("${ChatColor.GRAY}[${ChatColor.GOLD}Emote${ChatColor.GRAY}] List of other-player emotes: ${ChatColor.RESET}$otherMessage.")
+            sender.sendMessage("${plugin.getPrefix()} List of other-player emotes: ${ChatColor.RESET}$otherMessage.")
 
             return true
         }
@@ -125,9 +125,23 @@ class SmileysCommand : CommandExecutor {
         }
 
         listMessage.substring(0, listMessage.length - 1)
-        sender.sendMessage("${ChatColor.GRAY}[${ChatColor.GOLD}Smileys${ChatColor.GRAY}] List of Smileys: ${ChatColor.RESET}$listMessage.")
+        sender.sendMessage("${plugin.getPrefix()} List of Smileys: ${ChatColor.RESET}$listMessage.")
 
         return true
     }
+}
 
+class ReloadCommand : CommandExecutor {
+
+    override fun onCommand(sender: CommandSender, cmd: Command, label: String, args: Array<String>): Boolean {
+
+        try {
+            plugin.reloadConfig()
+            sender.sendMessage("${plugin.getPrefix()} ${ChatColor.GREEN}Config successfully reloaded.")
+        } catch (e: Exception) {
+            sender.sendMessage("${plugin.getPrefix()} ${ChatColor.RED}Config could not be reloaded.")
+        }
+
+        return true
+    }
 }

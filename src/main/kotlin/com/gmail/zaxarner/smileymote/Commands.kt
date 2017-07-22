@@ -68,7 +68,7 @@ class EmoteCommand : CommandExecutor {
             if(plugin.selfEmotes.keys.contains(args[0])) {
                 val message = plugin.selfEmotes[args[0]] ?: return false
 
-                Bukkit.broadcastMessage("${ChatColor.GRAY}[${ChatColor.GOLD}Emote${ChatColor.GRAY}] ${message.replace("{player}", sender.name)}")
+                Bukkit.broadcastMessage("${plugin.getPrefix()} ${message.replace("{player}", sender.name)}")
                 return true
             } else if(plugin.otherEmotes.keys.contains(args[0])) {
                 sender.sendMessage("${ChatColor.RED}That is not a valid player!")
@@ -88,7 +88,7 @@ class EmoteCommand : CommandExecutor {
             if(plugin.otherEmotes.keys.contains(args[0])) {
                 val message = plugin.otherEmotes[args[0]] ?: return false
 
-                Bukkit.broadcastMessage("${ChatColor.GRAY}[${ChatColor.GOLD}Emote${ChatColor.GRAY}] ${message.replace("{player1}", sender.name).replace("{player}", sender.name)
+                Bukkit.broadcastMessage("${plugin.getPrefix()} ${message.replace("{player1}", sender.name).replace("{player}", sender.name)
                         .replace("{player2}", target.name)}")
                 return true
             }

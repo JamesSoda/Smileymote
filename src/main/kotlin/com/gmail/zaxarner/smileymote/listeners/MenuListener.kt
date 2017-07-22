@@ -2,10 +2,10 @@ package com.gmail.zaxarner.smileymote.listeners
 
 import com.gmail.zaxarner.smileymote.extensions.getDisplayName
 import com.gmail.zaxarner.smileymote.menu.Menu
-import com.gmail.zaxarner.smileymote.menu.PlayerSelectMenu
 import com.gmail.zaxarner.smileymote.menus
 import com.gmail.zaxarner.smileymote.plugin
 import org.bukkit.Bukkit
+import org.bukkit.ChatColor
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -35,7 +35,7 @@ object MenuListener : Listener {
             }
         }
 
-        if(inventory.holder is PlayerSelectMenu) {
+        if(inventory.name == "${ChatColor.DARK_AQUA}Select a Player") {
             val item = inventory.getItem(slot)
             event.isCancelled = true
 
@@ -55,7 +55,7 @@ object MenuListener : Listener {
         val inventory = event.inventory
         val player = event.player
 
-        if(inventory.holder is PlayerSelectMenu) {
+        if(inventory.name == "${ChatColor.DARK_AQUA}Select a Player") {
             plugin.playerSelectMenu.playersSelecting.remove(player)
         }
     }

@@ -16,7 +16,7 @@ object ChatListener : Listener{
 
         val smileySection = plugin.config.getConfigurationSection("smileys")
 
-        if(event.player.hasPermission("smileymote.user"))
+        if(!event.player.hasPermission("smileymote.smiley")) return
 
         for(s in smileySection.getKeys(false)) {
             val input = smileySection.getString(s + ".input") ?: continue

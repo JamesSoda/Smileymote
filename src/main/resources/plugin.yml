@@ -6,11 +6,11 @@ author: Zaxarner
 commands:
     emote:
       description: "Use an emote"
-      permission: smileymote.user
+      permission: smileymote.emote
       usage: "/<command> <emote> <player [optional]>"
       aliases: [smote, em]
     smileys:
       description: "Lists all of the smileys"
-      permission: smileymote.user
+      permission: smileymote.smiley
       usage: "/<command>"
       aliases: [smiley, smiles]

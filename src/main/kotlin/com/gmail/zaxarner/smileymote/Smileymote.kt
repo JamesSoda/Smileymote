@@ -132,7 +132,7 @@ class Smileymote : JavaPlugin() {
         }
 
         playerSelectMenu.playersSelecting.put(player, message)
-        player.openInventory(playerSelectMenu.inventory)
+        playerSelectMenu.openInventory(player)
     }
 }
 

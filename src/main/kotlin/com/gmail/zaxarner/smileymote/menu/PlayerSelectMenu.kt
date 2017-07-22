@@ -5,18 +5,14 @@ import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.entity.Player
-import org.bukkit.inventory.Inventory
-import org.bukkit.inventory.InventoryHolder
 import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.meta.SkullMeta
 
 /**
  * Created on 7/15/2017.
  */
-object PlayerSelectMenu: InventoryHolder {
+object PlayerSelectMenu {
 
-    val playerItems = mutableMapOf<Int, ItemStack>()
-
-    val inv = Bukkit.createInventory(this, 54, "${ChatColor.DARK_AQUA}Select a Player")
 
     val playersSelecting = mutableMapOf<Player, String>()
 
@@ -24,30 +20,37 @@ object PlayerSelectMenu: InventoryHolder {
         val playersInMenu = mutableListOf<Player>()
 
         for(p in Bukkit.getOnlinePlayers()) {
-            if(p.openInventory.topInventory.holder == this) {
+            if(p.openInventory.topInventory.name == "${ChatColor.DARK_AQUA}Select a Player") {
                 playersInMenu.add(p)
             }
         }
 
-        playerItems.clear()
-        for(i in 0..Bukkit.getOnlinePlayers().size - 1) {
-            val p = Bukkit.getOnlinePlayers().toList()[i] ?: continue
-
-            playerItems.put(i, Material.SKULL_ITEM.toItemStack(1, 3, "${ChatColor.BLUE}${p.name}", listOf("${ChatColor.DARK_AQUA}Select this player?")))
-        }
-
         for(p in playersInMenu) {
-            p.openInventory(inventory)
+            openInventory(p)
         }
     }
 
-    override fun getInventory(): Inventory {
+    fun openInventory(player: Player) {
+        val inv = Bukkit.createInventory(null, 54, "${ChatColor.DARK_AQUA}Select a Player")
+
+        val playerItems = mutableMapOf<Int, ItemStack>()
 
         playerItems.clear()
+        var offset = 0
         for(i in 0..Bukkit.getOnlinePlayers().size - 1) {
             val p = Bukkit.getOnlinePlayers().toList()[i] ?: continue
 
-            playerItems.put(i, Material.SKULL_ITEM.toItemStack(1, 3, "${ChatColor.BLUE}${p.name}", listOf("${ChatColor.DARK_AQUA}Select this player?")))
+            if(p != player) {
+
+                val skull = Material.SKULL_ITEM.toItemStack(1, 3, "${ChatColor.BLUE}${p.name}", listOf("${ChatColor.DARK_AQUA}Select this player?"))
+                val meta = skull.itemMeta as SkullMeta
+                meta.owner = p.name
+
+
+                playerItems.put(i - offset, skull)
+            } else {
+                offset++
+            }
         }
 
         if(playerItems.isNotEmpty()) {
@@ -60,6 +63,6 @@ object PlayerSelectMenu: InventoryHolder {
             }
         }
 
-        return inv
+        player.openInventory(inv)
     }
 }

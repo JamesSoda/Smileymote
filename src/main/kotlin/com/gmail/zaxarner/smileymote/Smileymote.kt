@@ -49,10 +49,11 @@ class Smileymote : JavaPlugin() {
         reloadCommand.executor = ReloadCommand()
         reloadCommand.usage = "${getPrefix()} ${ChatColor.RESET}${reloadCommand.usage}"
 
+        initialiseEmoteMenu()
 
     }
 
-    fun initalizeEmoteMenu() {
+    fun initialiseEmoteMenu() {
         val selfEmoteSection = plugin.config.getConfigurationSection("emotes.self")
         val otherEmoteSection = plugin.config.getConfigurationSection("emotes.other")
 

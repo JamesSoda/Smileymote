@@ -137,7 +137,7 @@ class ReloadCommand : CommandExecutor {
 
         try {
             plugin.reloadConfig()
-            plugin.initalizeEmoteMenu()
+            plugin.initialiseEmoteMenu()
             sender.sendMessage("${plugin.getPrefix()} ${ChatColor.GREEN}Config successfully reloaded.")
         } catch (e: Exception) {
             sender.sendMessage("${plugin.getPrefix()} ${ChatColor.RED}Config could not be reloaded.")

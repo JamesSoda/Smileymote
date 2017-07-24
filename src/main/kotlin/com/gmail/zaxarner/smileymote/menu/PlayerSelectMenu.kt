@@ -45,7 +45,7 @@ object PlayerSelectMenu {
                 val skull = Material.SKULL_ITEM.toItemStack(1, 3, "${ChatColor.BLUE}${p.name}", listOf("${ChatColor.DARK_AQUA}Select this player?"))
                 val meta = skull.itemMeta as SkullMeta
                 meta.owner = p.name
-
+                skull.itemMeta = meta
 
                 playerItems.put(i - offset, skull)
             } else {

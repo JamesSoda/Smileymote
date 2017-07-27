@@ -18,12 +18,12 @@ object SignListener : Listener {
 
         val smileySection = plugin.config.getConfigurationSection("smileys")
 
-        for(i in 0..4) {
-            val line = event.lines[i]
+        for(i in 0..event.lines.size - 1) {
+            val line = event.lines[i] ?: continue
 
-            for(s in smileySection.getKeys(false)) {
+            for (s in smileySection.getKeys(false)) {
                 val input = smileySection.getString(s + ".input") ?: continue
-                if(line.contains(input, false)) {
+                if (line.contains(input, false)) {
                     val output = smileySection.getString(s + ".output") ?: continue
 
                     event.setLine(i, line.replace(input, output, false))

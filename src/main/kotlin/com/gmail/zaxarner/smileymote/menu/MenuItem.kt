@@ -13,7 +13,7 @@ import org.bukkit.inventory.ItemStack
 abstract class MenuItem constructor(val name: String, val material: Material, val data: Short, val description: String) {
 
     fun getItem() : ItemStack {
-        return material.toItemStack(data = data, title = name, lore = description.addLineBreaks(color = ChatColor.DARK_AQUA))
+        return material.toItemStack(title = name, lore = description.addLineBreaks(color = ChatColor.DARK_AQUA))
     }
 
     abstract fun onClick(player: Player)

@@ -38,39 +38,41 @@ class Smileymote : JavaPlugin() {
         this.server.pluginManager.registerEvents(SignListener, this)
 
         val emoteCommand = getCommand("emote")
-        emoteCommand.executor = EmoteCommand()
-        emoteCommand.usage = "${getPrefix()} ${ChatColor.RESET}${emoteCommand.usage}"
+        emoteCommand?.setExecutor(EmoteCommand())
+        emoteCommand?.usage = "${getPrefix()} ${ChatColor.RESET}${emoteCommand?.usage}"
 
         val smileysCommand = getCommand("smileys")
-        smileysCommand.executor = SmileysCommand()
-        smileysCommand.usage = "${getPrefix()} ${ChatColor.RESET}${smileysCommand.usage}"
+        smileysCommand?.setExecutor(SmileysCommand())
+        smileysCommand?.usage = "${getPrefix()} ${ChatColor.RESET}${smileysCommand?.usage}"
 
         val reloadCommand = getCommand("smileymotereload")
-        reloadCommand.executor = ReloadCommand()
-        reloadCommand.usage = "${getPrefix()} ${ChatColor.RESET}${reloadCommand.usage}"
+        reloadCommand?.setExecutor(ReloadCommand())
+        reloadCommand?.usage = "${getPrefix()} ${ChatColor.RESET}${reloadCommand?.usage}"
 
         initialiseEmoteMenu()
 
     }
 
     fun initialiseEmoteMenu() {
-        val selfEmoteSection = plugin.config.getConfigurationSection("emotes.self")
-        val otherEmoteSection = plugin.config.getConfigurationSection("emotes.other")
+        val selfEmoteSection = plugin.config.getConfigurationSection("emotes.self") ?: return
+        val otherEmoteSection = plugin.config.getConfigurationSection("emotes.other") ?: return
 
         for(emote in selfEmoteSection.getKeys(false)) {
-            selfEmotes.put(emote, selfEmoteSection.getString("$emote.message"))
+            selfEmotes.put(emote, selfEmoteSection.getString("$emote.message")!!)
         }
 
         for(emote in otherEmoteSection.getKeys(false)) {
-            otherEmotes.put(emote, otherEmoteSection.getString("$emote.message"))
+            otherEmotes.put(emote, otherEmoteSection.getString("$emote.message")!!)
         }
 
-        emoteMenu.addMenuItem(12, object : MenuItem("${ChatColor.BLUE}Self Emotes", Material.SKULL_ITEM, 3, "Display your emotions to everyone!") {
+        emoteMenu.addMenuItem(12, object : MenuItem("${ChatColor.BLUE}Self Emotes",
+                Material.PLAYER_HEAD, 3, "Display your emotions to everyone!") {
             override fun onClick(player: Player) {
                 player.openInventory(selfEmoteMenu.inventory)
             }
         })
-        emoteMenu.addMenuItem(14, object : MenuItem("${ChatColor.BLUE}Other-Player Emotes", Material.SKULL_ITEM, 3, "Display your emotions about another player to everyone!") {
+        emoteMenu.addMenuItem(14, object : MenuItem("${ChatColor.BLUE}Other-Player Emotes",
+                Material.PLAYER_HEAD, 3, "Display your emotions about another player to everyone!") {
             override fun onClick(player: Player) {
                 player.openInventory(otherEmoteMenu.inventory)
             }
@@ -83,13 +85,13 @@ class Smileymote : JavaPlugin() {
 
             var description = "A simple emote"
             if(selfEmoteSection["$name.description"] != null) {
-                description = selfEmoteSection.getString("$name.description")
+                description = selfEmoteSection.getString("$name.description")!!
             }
 
             var material = Material.STICK
             var data = 0
             if(selfEmoteSection["$name.material"] != null) {
-                material = Material.getMaterial(selfEmoteSection.getString("$name.material"))
+                material = Material.getMaterial(selfEmoteSection.getString("$name.material")!!)!!
 
                 if(selfEmoteSection["$name.data"] != null) {
                     data = selfEmoteSection.getInt("$name.data")
@@ -111,13 +113,13 @@ class Smileymote : JavaPlugin() {
 
             var description = "A simple emote"
             if(otherEmoteSection["$name.description"] != null) {
-                description = otherEmoteSection.getString("$name.description")
+                description = otherEmoteSection.getString("$name.description")!!
             }
 
             var material = Material.STICK
             var data = 0
             if(otherEmoteSection["$name.material"] != null) {
-                material = Material.getMaterial(otherEmoteSection.getString("$name.material"))
+                material = Material.getMaterial(otherEmoteSection.getString("$name.material")!!)!!
 
                 if(otherEmoteSection["$name.data"] != null) {
                     data = otherEmoteSection.getInt("$name.data")
@@ -130,8 +132,6 @@ class Smileymote : JavaPlugin() {
                 }
             })
         }
-
-        playerSelectMenu.updatePlayerSelectMenu()
     }
 
 
@@ -147,7 +147,7 @@ class Smileymote : JavaPlugin() {
 
     fun getPrefix() : String {
         if(config["prefix"] != null) {
-            return ChatColor.translateAlternateColorCodes('&', config.getString("prefix"))
+            return ChatColor.translateAlternateColorCodes('&', config.getString("prefix")!!)
         }
 
         return ChatColor.translateAlternateColorCodes('&', "&7[&6Smileymote&7] ")

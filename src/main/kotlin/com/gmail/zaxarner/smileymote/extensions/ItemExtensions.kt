@@ -7,8 +7,8 @@ import org.bukkit.inventory.ItemStack
 /**
  * Created on 7/15/2017.
  */
-fun Material.toItemStack(size: Int = 1, data: Short = 0, title: String? = null, lore: List<String>? = null) : ItemStack {
-    val item = ItemStack(this, size, data)
+fun Material.toItemStack(size: Int = 1, title: String? = null, lore: List<String>? = null) : ItemStack {
+    val item = ItemStack(this, size)
 
     if (title != null) {
         item.setDisplayName(title)
@@ -23,8 +23,8 @@ fun Material.toItemStack(size: Int = 1, data: Short = 0, title: String? = null, 
 }
 
 fun ItemStack.setDisplayName(displayName: String) : ItemStack {
-    val meta = itemMeta
-    meta.displayName = displayName
+    val meta = itemMeta ?: return this
+    meta.setDisplayName(displayName)
     itemMeta = meta
 
     return this
@@ -40,7 +40,7 @@ fun ItemStack.getDisplayName() : String {
 }
 
 fun ItemStack.setLore(lore: List<String>) : ItemStack {
-    val meta = itemMeta
+    val meta = itemMeta ?: return this
     meta.lore = lore
     itemMeta = meta
 
@@ -54,7 +54,7 @@ fun ItemStack.getLore() : MutableList<String> {
 }
 
 fun ItemStack.addItemFlag(flag: ItemFlag) : ItemStack {
-    val meta = itemMeta
+    val meta = itemMeta ?: return this
     meta.addItemFlags(flag)
     itemMeta = meta
 
@@ -62,7 +62,7 @@ fun ItemStack.addItemFlag(flag: ItemFlag) : ItemStack {
 }
 
 fun ItemStack.addLore(string : String) : ItemStack {
-    val meta = itemMeta
+    val meta = itemMeta ?: return this
     val lore = meta.lore ?: mutableListOf()
     lore.add(string)
     meta.lore = lore

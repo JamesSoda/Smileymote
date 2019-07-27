@@ -89,7 +89,7 @@ class EmoteCommand : CommandExecutor {
                 val message = plugin.otherEmotes[args[0]] ?: return false
 
                 Bukkit.broadcastMessage("${plugin.getPrefix()} ${message.replace("{player1}", sender.name).replace("{player}", sender.name)
-                        .replace("{player2}", target.name)}")
+                        .replace("{player2}", target?.name!!)}")
                 return true
             }
         }
@@ -107,7 +107,7 @@ class SmileysCommand : CommandExecutor {
             return true
         }
 
-        val smileySection = plugin.config.getConfigurationSection("smileys")
+        val smileySection = plugin.config.getConfigurationSection("smileys") ?: return false
 
         var listMessage = ""
 

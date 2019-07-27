@@ -16,7 +16,7 @@ object SignListener : Listener {
         if(!player.hasPermission("smileymote.user")) return
 
 
-        val smileySection = plugin.config.getConfigurationSection("smileys")
+        val smileySection = plugin.config.getConfigurationSection("smileys") ?: return
 
         for(i in 0..event.lines.size - 1) {
             val line = event.lines[i] ?: continue

@@ -8,7 +8,7 @@ import java.util.*
  * Created on 7/15/2017.
  */
 fun String.addLineBreaks(length: Int = 40, color: ChatColor = ChatColor.RESET) : List<String> {
-    var string = ChatColor.stripColor(this.trim())
+    var string = ChatColor.stripColor(this.trim()) ?: return arrayListOf()
     if(string.length >= length) {
         string = WordUtils.wrap(ChatColor.stripColor(this.trim()), length)
         val stringArray = string.split(System.lineSeparator().toRegex()).toTypedArray()

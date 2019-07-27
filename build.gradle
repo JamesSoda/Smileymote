@@ -86,8 +86,7 @@ repositories {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    //provided fileTree(dir: 'lib', include: ['*.jar'])
 
-    provided group: 'org.bukkit', name: 'bukkit', version: '1.12-R0.1-SNAPSHOT'
-    provided group: 'org.spigotmc', name: 'spigot-api', version: '1.12-R0.1-SNAPSHOT'
+    provided group: 'org.bukkit', name: 'bukkit', version: '1.14.4-R0.1-SNAPSHOT'
+    provided group: 'org.spigotmc', name: 'spigot-api', version: '1.14.4-R0.1-SNAPSHOT'
 }

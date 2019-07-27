@@ -35,8 +35,8 @@ object MenuListener : Listener {
             }
         }
 
-        if(inventory.name == "${ChatColor.DARK_AQUA}Select a Player") {
-            val item = inventory.getItem(slot)
+        if(event.view.title == "${ChatColor.DARK_AQUA}Select a Player") {
+            val item = inventory.getItem(slot) ?: return
             event.isCancelled = true
 
             val emote = plugin.playerSelectMenu.playersSelecting[player] ?: return
@@ -55,7 +55,7 @@ object MenuListener : Listener {
         val inventory = event.inventory
         val player = event.player
 
-        if(inventory.name == "${ChatColor.DARK_AQUA}Select a Player") {
+        if(event.view.title == "${ChatColor.DARK_AQUA}Select a Player") {
             plugin.playerSelectMenu.playersSelecting.remove(player)
         }
     }

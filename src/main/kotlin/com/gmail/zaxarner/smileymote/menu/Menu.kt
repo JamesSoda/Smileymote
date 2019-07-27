@@ -31,8 +31,8 @@ class Menu constructor(val name: String, val size: Int) : InventoryHolder{
         menuItems.forEach { inventory.setItem(it.key, it.value.getItem()) }
 
         for (i in 0..inventory.size - 1) {
-            if(inventory.getItem(i) == null || inventory.getItem(i).type == Material.AIR) {
-                inventory.setItem(i, Material.STAINED_GLASS_PANE.toItemStack(1, title = "..."))
+            if(inventory.getItem(i) == null || inventory.getItem(i)?.type == Material.AIR) {
+                inventory.setItem(i, Material.BLACK_STAINED_GLASS_PANE.toItemStack(title = "..."))
             }
         }
 

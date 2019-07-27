@@ -16,20 +16,6 @@ object PlayerSelectMenu {
 
     val playersSelecting = mutableMapOf<Player, String>()
 
-    fun updatePlayerSelectMenu() {
-        val playersInMenu = mutableListOf<Player>()
-
-        for(p in Bukkit.getOnlinePlayers()) {
-            if(p.openInventory.topInventory.name == "${ChatColor.DARK_AQUA}Select a Player") {
-                playersInMenu.add(p)
-            }
-        }
-
-        for(p in playersInMenu) {
-            openInventory(p)
-        }
-    }
-
     fun openInventory(player: Player) {
         val inv = Bukkit.createInventory(null, 54, "${ChatColor.DARK_AQUA}Select a Player")
 
@@ -42,7 +28,7 @@ object PlayerSelectMenu {
 
             if(p != player) {
 
-                val skull = Material.SKULL_ITEM.toItemStack(1, 3, "${ChatColor.BLUE}${p.name}", listOf("${ChatColor.DARK_AQUA}Select this player?"))
+                val skull = Material.PLAYER_HEAD.toItemStack(1,  "${ChatColor.BLUE}${p.name}", listOf("${ChatColor.DARK_AQUA}Select this player?"))
                 val meta = skull.itemMeta as SkullMeta
                 meta.owner = p.name
                 skull.itemMeta = meta
@@ -58,8 +44,8 @@ object PlayerSelectMenu {
         }
 
         for (i in 0..inv.size - 1) {
-            if(inv.getItem(i) == null || inv.getItem(i).type == Material.AIR) {
-                inv.setItem(i, Material.STAINED_GLASS_PANE.toItemStack(1, title = "..."))
+            if(inv.getItem(i) == null || inv.getItem(i)?.type == Material.AIR) {
+                inv.setItem(i, Material.BLACK_STAINED_GLASS_PANE.toItemStack(1, title = "..."))
             }
         }
 

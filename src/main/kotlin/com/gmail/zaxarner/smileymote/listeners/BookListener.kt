@@ -22,7 +22,7 @@ object BookListener : Listener {
         for(i in 1..meta.pageCount) {
             var page = meta.getPage(i)
 
-            val smileySection = plugin.config.getConfigurationSection("smileys")
+            val smileySection = plugin.config.getConfigurationSection("smileys") ?: return
 
             for(s in smileySection.getKeys(false)) {
                 val input = smileySection.getString(s + ".input") ?: continue

@@ -14,7 +14,7 @@ object ChatListener : Listener{
     fun onPlayerChat(event: AsyncPlayerChatEvent) {
         var message = event.message
 
-        val smileySection = plugin.config.getConfigurationSection("smileys")
+        val smileySection = plugin.config.getConfigurationSection("smileys") ?: return
 
         if(!event.player.hasPermission("smileymote.smiley")) return
 

@@ -26,7 +26,6 @@ emotes:
       #message: 'test'
       #description: 'description'
       #material: APPLE
-      #data: 0
     cry:
       message: '{player} starts crying'
       description: 'Cry uncontrollably'

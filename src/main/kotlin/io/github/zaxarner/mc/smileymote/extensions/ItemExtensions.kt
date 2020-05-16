@@ -1,4 +1,4 @@
-package com.gmail.zaxarner.smileymote.extensions
+package io.github.zaxarner.mc.smileymote.extensions
 
 import org.bukkit.Material
 import org.bukkit.inventory.ItemFlag

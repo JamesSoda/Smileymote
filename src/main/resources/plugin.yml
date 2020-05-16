@@ -1,22 +1,17 @@
 name: Smileymote
-main: com.gmail.zaxarner.smileymote.Smileymote
-version: @VERSION@
+main: io.github.zaxarner.mc.smileymote.Smileymote
+version: @plugin.version@
 description: Emotes & Smileys
 author: Zaxarner
-api-version: 1.14
-commands:
-    emote:
-      description: "Use an emote"
-      permission: smileymote.emote
-      usage: "/<command> <emote> <player [optional]>"
-      aliases: [smote, em]
-    smileys:
-      description: "Lists all of the smileys"
-      permission: smileymote.smiley
-      usage: "/<command>"
-      aliases: [smiley, smiles]
-    smileymotereload:
-      description: "Reloads the Smileymote config"
-      permission: smileymote.admin
-      usage: "/<command>"
-      aliases: [smileyreload, emotereload, smilereload]
+api-version: "1.15"
+permissions:
+  smileymote.emote:
+    description: "Allows using emotes"
+  smileymote.smiley:
+    description: "Allows using smileys in chat, signs, books, etc"
+  smileymote.admin:
+    description: "Allows access to Admin commands such as reloading"
+    default: op
+    children:
+      smileymote.emote: true
+      smileymote.smiley: true

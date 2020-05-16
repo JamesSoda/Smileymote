@@ -1,6 +1,6 @@
-package com.gmail.zaxarner.smileymote.listeners
+package io.github.zaxarner.mc.smileymote.listeners
 
-import com.gmail.zaxarner.smileymote.plugin
+import io.github.zaxarner.mc.smileymote.plugin
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerEditBookEvent
@@ -14,7 +14,7 @@ object BookListener : Listener {
     @EventHandler
     fun onBookWrite(event: PlayerEditBookEvent) {
         val player = event.player
-        if(!player.hasPermission("smileymote.user")) return
+        if(!player.hasPermission("smileymote.smiley")) return
 
         val meta = event.newBookMeta
 
@@ -25,8 +25,8 @@ object BookListener : Listener {
             val smileySection = plugin.config.getConfigurationSection("smileys") ?: return
 
             for(s in smileySection.getKeys(false)) {
-                val input = smileySection.getString(s + ".input") ?: continue
-                val output = smileySection.getString(s + ".output") ?: continue
+                val input = smileySection.getString("$s.input") ?: continue
+                val output = smileySection.getString("$s.output") ?: continue
 
                 page = page.replace(input, output, false)
 

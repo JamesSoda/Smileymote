@@ -1,4 +1,4 @@
-package com.gmail.zaxarner.smileymote.toolbox
+package io.github.zaxarner.mc.smileymote.toolbox
 
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor

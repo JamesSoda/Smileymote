@@ -1,7 +1,7 @@
-package com.gmail.zaxarner.smileymote.menu
+package io.github.zaxarner.mc.smileymote.menu
 
-import com.gmail.zaxarner.smileymote.extensions.addLineBreaks
-import com.gmail.zaxarner.smileymote.extensions.toItemStack
+import io.github.zaxarner.mc.smileymote.extensions.addLineBreaks
+import io.github.zaxarner.mc.smileymote.extensions.toItemStack
 import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.entity.Player

@@ -1,6 +1,6 @@
-package com.gmail.zaxarner.smileymote.listeners
+package io.github.zaxarner.mc.smileymote.listeners
 
-import com.gmail.zaxarner.smileymote.plugin
+import io.github.zaxarner.mc.smileymote.plugin
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.AsyncPlayerChatEvent
@@ -12,16 +12,16 @@ object ChatListener : Listener{
 
     @EventHandler
     fun onPlayerChat(event: AsyncPlayerChatEvent) {
+        if(!event.player.hasPermission("smileymote.smiley")) return
         var message = event.message
 
         val smileySection = plugin.config.getConfigurationSection("smileys") ?: return
 
-        if(!event.player.hasPermission("smileymote.smiley")) return
 
         for(s in smileySection.getKeys(false)) {
-            val input = smileySection.getString(s + ".input") ?: continue
+            val input = smileySection.getString("$s.input") ?: continue
             if(message.contains(input, false)) {
-                val output = smileySection.getString(s + ".output") ?: continue
+                val output = smileySection.getString("$s.output") ?: continue
 
                 message = message.replace(input, output, false)
             }

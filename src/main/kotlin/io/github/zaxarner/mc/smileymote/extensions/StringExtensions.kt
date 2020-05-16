@@ -1,4 +1,4 @@
-package com.gmail.zaxarner.smileymote.extensions
+package io.github.zaxarner.mc.smileymote.extensions
 
 import org.apache.commons.lang.WordUtils
 import org.bukkit.ChatColor

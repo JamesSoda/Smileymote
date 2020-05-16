@@ -1,9 +1,9 @@
-package com.gmail.zaxarner.smileymote.listeners
+package io.github.zaxarner.mc.smileymote.listeners
 
-import com.gmail.zaxarner.smileymote.extensions.getDisplayName
-import com.gmail.zaxarner.smileymote.menu.Menu
-import com.gmail.zaxarner.smileymote.menus
-import com.gmail.zaxarner.smileymote.plugin
+import io.github.zaxarner.mc.smileymote.extensions.getDisplayName
+import io.github.zaxarner.mc.smileymote.menu.Menu
+import io.github.zaxarner.mc.smileymote.menus
+import io.github.zaxarner.mc.smileymote.plugin
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.entity.Player

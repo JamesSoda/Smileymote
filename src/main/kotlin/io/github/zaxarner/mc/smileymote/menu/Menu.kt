@@ -1,7 +1,7 @@
-package com.gmail.zaxarner.smileymote.menu
+package io.github.zaxarner.mc.smileymote.menu
 
-import com.gmail.zaxarner.smileymote.extensions.toItemStack
-import com.gmail.zaxarner.smileymote.menus
+import io.github.zaxarner.mc.smileymote.extensions.toItemStack
+import io.github.zaxarner.mc.smileymote.menus
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.inventory.Inventory

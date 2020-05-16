@@ -1,13 +1,15 @@
-package com.gmail.zaxarner.smileymote
+package io.github.zaxarner.mc.smileymote
 
-import com.gmail.zaxarner.smileymote.extensions.makePretty
-import com.gmail.zaxarner.smileymote.listeners.BookListener
-import com.gmail.zaxarner.smileymote.listeners.ChatListener
-import com.gmail.zaxarner.smileymote.listeners.MenuListener
-import com.gmail.zaxarner.smileymote.listeners.SignListener
-import com.gmail.zaxarner.smileymote.menu.Menu
-import com.gmail.zaxarner.smileymote.menu.MenuItem
-import com.gmail.zaxarner.smileymote.menu.PlayerSelectMenu
+import co.aikar.commands.BukkitCommandManager
+import com.google.common.collect.ImmutableList
+import io.github.zaxarner.mc.smileymote.extensions.makePretty
+import io.github.zaxarner.mc.smileymote.listeners.BookListener
+import io.github.zaxarner.mc.smileymote.listeners.ChatListener
+import io.github.zaxarner.mc.smileymote.listeners.MenuListener
+import io.github.zaxarner.mc.smileymote.listeners.SignListener
+import io.github.zaxarner.mc.smileymote.menu.Menu
+import io.github.zaxarner.mc.smileymote.menu.MenuItem
+import io.github.zaxarner.mc.smileymote.menu.PlayerSelectMenu
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Material
@@ -29,6 +31,8 @@ class Smileymote : JavaPlugin() {
     val selfEmotes = mutableMapOf<String, String>()
     val otherEmotes = mutableMapOf<String, String>()
 
+    private lateinit var commandManager: BukkitCommandManager
+
     override fun onEnable() {
         this.saveDefaultConfig()
 
@@ -37,32 +41,36 @@ class Smileymote : JavaPlugin() {
         this.server.pluginManager.registerEvents(MenuListener, this)
         this.server.pluginManager.registerEvents(SignListener, this)
 
-        val emoteCommand = getCommand("emote")
-        emoteCommand?.setExecutor(EmoteCommand())
-        emoteCommand?.usage = "${getPrefix()} ${ChatColor.RESET}${emoteCommand?.usage}"
-
-        val smileysCommand = getCommand("smileys")
-        smileysCommand?.setExecutor(SmileysCommand())
-        smileysCommand?.usage = "${getPrefix()} ${ChatColor.RESET}${smileysCommand?.usage}"
-
-        val reloadCommand = getCommand("smileymotereload")
-        reloadCommand?.setExecutor(ReloadCommand())
-        reloadCommand?.usage = "${getPrefix()} ${ChatColor.RESET}${reloadCommand?.usage}"
-
-        initialiseEmoteMenu()
+        initialiseEmotes()
+        registerCommands()
 
     }
 
-    fun initialiseEmoteMenu() {
+    override fun onDisable() {
+        commandManager.unregisterCommands()
+    }
+
+    fun reload() {
+        this.reloadConfig()
+
+        selfEmotes.clear()
+        otherEmotes.clear()
+        initialiseEmotes()
+
+        commandManager.unregisterCommands()
+        registerCommands()
+    }
+
+    fun initialiseEmotes() {
         val selfEmoteSection = plugin.config.getConfigurationSection("emotes.self") ?: return
         val otherEmoteSection = plugin.config.getConfigurationSection("emotes.other") ?: return
 
         for(emote in selfEmoteSection.getKeys(false)) {
-            selfEmotes.put(emote, selfEmoteSection.getString("$emote.message")!!)
+            selfEmotes[emote] = selfEmoteSection.getString("$emote.message")!!
         }
 
         for(emote in otherEmoteSection.getKeys(false)) {
-            otherEmotes.put(emote, otherEmoteSection.getString("$emote.message")!!)
+            otherEmotes[emote] = otherEmoteSection.getString("$emote.message")!!
         }
 
         emoteMenu.addMenuItem(12, object : MenuItem("${ChatColor.BLUE}Self Emotes",
@@ -134,6 +142,19 @@ class Smileymote : JavaPlugin() {
         }
     }
 
+    fun registerCommands() {
+        commandManager = BukkitCommandManager(this)
+
+        commandManager.registerCommand(SmileymoteCommand(this))
+        commandManager.registerCommand(EmoteCommand(this))
+        commandManager.registerCommand(SmileysCommand(this))
+
+        val emoteNames = mutableListOf<String>()
+        emoteNames.addAll(selfEmotes.keys)
+        emoteNames.addAll(otherEmotes.keys)
+
+        commandManager.commandCompletions.registerCompletion("emotes") { emoteNames }
+    }
 
     fun playerSelectForEmote(player: Player, message: String?) {
         if(message == null) {
@@ -141,7 +162,7 @@ class Smileymote : JavaPlugin() {
             return
         }
 
-        playerSelectMenu.playersSelecting.put(player, message)
+        playerSelectMenu.playersSelecting[player] = message
         playerSelectMenu.openInventory(player)
     }
 

@@ -1,6 +1,6 @@
-package com.gmail.zaxarner.smileymote.menu
+package io.github.zaxarner.mc.smileymote.menu
 
-import com.gmail.zaxarner.smileymote.extensions.toItemStack
+import io.github.zaxarner.mc.smileymote.extensions.toItemStack
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Material
@@ -12,7 +12,6 @@ import org.bukkit.inventory.meta.SkullMeta
  * Created on 7/15/2017.
  */
 object PlayerSelectMenu {
-
 
     val playersSelecting = mutableMapOf<Player, String>()
 

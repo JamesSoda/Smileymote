@@ -6,7 +6,7 @@
 
     <properties>
         <kotlin.version>1.3.61</kotlin.version>
-        <plugin.version>3.0.0</plugin.version>
+        <plugin.version>3.0.1</plugin.version>
         <jarLocation>${project.basedir}/target</jarLocation>
     </properties>
 

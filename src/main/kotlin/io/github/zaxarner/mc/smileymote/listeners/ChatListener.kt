@@ -4,13 +4,14 @@ import io.github.zaxarner.mc.smileymote.plugin
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.AsyncPlayerChatEvent
+import org.bukkit.event.EventPriority
 
 /**
  * Created on 7/15/2017.
  */
 object ChatListener : Listener{
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     fun onPlayerChat(event: AsyncPlayerChatEvent) {
         if(!event.player.hasPermission("smileymote.smiley")) return
         var message = event.message

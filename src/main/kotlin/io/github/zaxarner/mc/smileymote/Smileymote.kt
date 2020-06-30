@@ -1,7 +1,6 @@
 package io.github.zaxarner.mc.smileymote
 
 import co.aikar.commands.BukkitCommandManager
-import com.google.common.collect.ImmutableList
 import io.github.zaxarner.mc.smileymote.extensions.makePretty
 import io.github.zaxarner.mc.smileymote.listeners.BookListener
 import io.github.zaxarner.mc.smileymote.listeners.ChatListener
